@@ -1,0 +1,24 @@
+{
+  "name": "pino-sqs",
+  "version": "1.0.0",
+  "description": "Pino transport for sending logs asynchronously to AWS SQS queue",
+  "main": "src/cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/siddmoitra/pino-sqs.git"
+  },
+  "keywords": [
+    "pino",
+    "sqs",
+    "logging"
+  ],
+  "author": "Sid Moitra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/siddmoitra/pino-sqs/issues"
+  },
+  "homepage": "https://github.com/siddmoitra/pino-sqs#readme"
+}
