@@ -1,8 +1,11 @@
 {
-  "name": "pino-sqs",
+  "name": "@sidmoitra/pino-sqs",
   "description": "Pino transport for sending logs asynchronously to AWS SQS queue",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "author": "Sid Moitra",
+  "bin": {
+    "pino-sqs": "./src/cli.js"
+  },
   "bugs": {
     "url": "https://github.com/siddmoitra/pino-sqs/issues"
   },
@@ -28,6 +31,9 @@
     "husky": "^4.2.3",
     "semantic-release": "^17.0.4"
   },
+  "files": [
+    "src"
+  ],
   "homepage": "https://github.com/siddmoitra/pino-sqs#readme",
   "husky": {
     "hooks": {
@@ -42,12 +48,35 @@
   ],
   "license": "MIT",
   "main": "./src/cli.js",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "release": {
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "conventionalcommits"
+        }
+      ],
+      "@semantic-release/github",
+      [
+        "@semantic-release/exec",
+        {
+          "publishCmd": "echo \"::set-output name=version::${nextRelease.version}\""
+        }
+      ],
+      "@semantic-release/release-notes-generator"
+    ]
+  },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/siddmoitra/pino-sqs.git"
+    "url": "https://github.com/siddmoitra/pino-sqs.git"
   },
   "scripts": {
     "lint": "npx eslint . && npx fixpack",
+    "semantic-release": "semantic-release",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

@@ -1,0 +1,68 @@
+name: CI
+
+on: [ push ]
+
+jobs:
+  workflow:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/
+      
+      - name: Restore Cache
+        uses: actions/cache@v1.0.0
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      # - name: Test
+      #   env:
+      #     CI: true
+      #   run: npm run test
+      
+      - name: Create New Version (if applicable)
+        id: release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
+      - name: Bump package.json version (if applicable)
+        if: "!!steps.release.outputs.version"
+        env:
+          SHA: ${{ github.sha }}
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          npm version $VERSION -no-git-tag-version --force
+
+      - name: Publish to NPM Packages (if applicable)
+        if: "!!steps.release.outputs.version"
+        env:
+          SHA: ${{ github.sha }}
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
+          echo "_auth=$NODE_AUTH_TOKEN" >>  .npmrc
+          echo "email=siddhartha.moitra21@gmail.com" >>  .npmrc
+          echo "always-auth=true" >>  .npmrc
+
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
