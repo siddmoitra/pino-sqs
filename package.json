@@ -20,5 +20,24 @@
   "bugs": {
     "url": "https://github.com/siddmoitra/pino-sqs/issues"
   },
-  "homepage": "https://github.com/siddmoitra/pino-sqs#readme"
+  "homepage": "https://github.com/siddmoitra/pino-sqs#readme",
+  "dependencies": {
+    "aws-sdk": "^2.649.0",
+    "axios": "^0.19.2",
+    "batch2": "^1.0.6",
+    "commander": "^5.0.0",
+    "pumpify": "^2.0.1",
+    "split2": "^3.1.1",
+    "through2": "^3.0.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "eslint": "^6.8.0",
+    "husky": "^4.2.3",
+    "semantic-release": "^17.0.4"
+  }
 }
