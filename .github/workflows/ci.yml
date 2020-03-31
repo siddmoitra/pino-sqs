@@ -55,8 +55,7 @@ jobs:
       - name: Publish to NPM Packages (if applicable)
         if: "!!steps.release.outputs.version"
         env:
-          SHA: ${{ github.sha }}
-          VERSION: ${{ steps.release.outputs.version }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
           echo "_auth=$NODE_AUTH_TOKEN" >>  .npmrc
@@ -64,5 +63,4 @@ jobs:
           echo "always-auth=true" >>  .npmrc
 
           npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
