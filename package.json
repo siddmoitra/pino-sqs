@@ -2,7 +2,7 @@
   "name": "pino-sqs",
   "version": "1.0.0",
   "description": "Pino transport for sending logs asynchronously to AWS SQS queue",
-  "main": "src/cli.js",
+  "main": "./src/cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -37,6 +37,8 @@
     "@semantic-release/exec": "^5.0.0",
     "@semantic-release/git": "^9.0.0",
     "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
     "husky": "^4.2.3",
     "semantic-release": "^17.0.4"
   }
