@@ -1,7 +1,7 @@
 {
   "name": "@sidmoitra/pino-sqs",
   "description": "Pino transport for sending logs asynchronously to AWS SQS queue",
-  "version": "0.0.0-development",
+  "version": "0.0.1",
   "author": "Sid Moitra",
   "bin": {
     "pino-sqs": "./src/cli.js"
