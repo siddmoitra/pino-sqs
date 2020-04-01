@@ -31,7 +31,7 @@ class AccessCredentials {
   constructor(options = {}) {
     this._ecsEnabled = options.ecsEnabled;
     if (!options.ecsEnabled) {
-      ACCESS_TOKEN.AccessKeyId = options.awsAccesskey;
+      ACCESS_TOKEN.AccessKeyId = options.awsAccessKey;
       ACCESS_TOKEN.SecretAccessKey = options.awsSecretKey;
     }
   }
