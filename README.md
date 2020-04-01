@@ -1,5 +1,7 @@
 # pino-sqs
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/83d93f06219843b8887556bdcfbccb02)](https://app.codacy.com/manual/siddmoitra/pino-sqs?utm_source=github.com&utm_medium=referral&utm_content=siddmoitra/pino-sqs&utm_campaign=Badge_Grade_Dashboard)
+
 This module provides a "transport" for [pino](http://getpino.io/#/) that forwards messages to AWS SQS queue.
 
 ## Installation
