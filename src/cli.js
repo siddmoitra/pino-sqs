@@ -38,7 +38,7 @@ const main = () => {
           awsSecretKey: options.awsSecretKey || process.env.PS_AWS_SECRET_KEY,
         };
         // Validate config
-        validate();
+        validate(config);
 
         const writeStream = await pump.createWriteStream(config);
         process.stdin.pipe(writeStream);
