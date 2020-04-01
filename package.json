@@ -76,6 +76,7 @@
   },
   "scripts": {
     "lint": "npx eslint . && npx fixpack",
+    "pino-sqs": "node ./src/cli.js",
     "semantic-release": "semantic-release",
     "test": "echo \"Error: no test specified\" && exit 1"
   }

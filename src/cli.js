@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const program = require('commander');
 const pump = require('./pump');
 
@@ -18,6 +20,10 @@ const validate = (config) => {
 
 // main cli logic
 const main = () => {
+  program
+    .name('pino-sqs')
+    .usage('[options]');
+
   program
     .option('--queue-url <queueUrl>', 'SQS Queue URL')
     .option('--aws-access-key <awsAccessKey>', 'AWS Access Key')
