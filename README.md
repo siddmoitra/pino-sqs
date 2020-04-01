@@ -5,53 +5,65 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/siddmoitra/pino-sqs/badge.svg?targetFile=package.json)](https://snyk.io/test/github/siddmoitra/pino-sqs?targetFile=package.json)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-This module provides a "transport" for [pino](http://getpino.io/#/) that forwards messages to AWS SQS queue.
+This module provides a "transport" for [pino](http://getpino.io/#/) that forwards messages to AWS SQS queue. For other transports, see [here](http://getpino.io/#/docs/transports?id=known-transports)
+
 
 ## Installation
 
 To use globally from command line:
 
 ```bash
-$ npm install -g @siddmoitra/pino-sqs
+$ npm install -g @sidmoitra/pino-sqs
 ```
 
 To include as a library in your project:
 
 ```bash
-$ npm install @siddmoitra/pino-sqs
+$ npm install @sidmoitra/pino-sqs
 ```
 
 ## CLI
 
-Want to use `@siddmoitra/pino-sqs` from the CLI?
+Want to use `@sidmoitra/pino-sqs` from the CLI?
 
-To use `@siddmoitra/pino-sqs` from the command line, you need to install it globally:
+Given an application `my-app` that logs via pino, you would use `@sidmoitra/pino-sqs` like so:
 
-```bash
-$ npm install -g @siddmoitra/pino-sqs
-```
-
-## Example
-
-Given an application `my-app` that logs via pino, you would use `@siddmoitra/pino-sqs` like so:
-
+### 1. If installed globally
 ```bash
 $ node my-app | pino-sqs <options>
 ```
+
+### 2. If installed as a library
+```bash
+$ node my-app | npx pino-sqs <options>
+```
+
 
 ## Usage
 
 You can pass the following options via cli arguments or use the environment variable associated:
 
-| Short command | Full command | Environment variable | Description |
-| --- | --- | --- | --- |
+| Full command      | Environment variable  | Description                                         |
+| ---               | ---                   | ---                                                 |
+| --queue-url       | PS_QUEUE_URL          | The AWS SQS URL                                     |
+| --aws-access-key  | PS_AWS_ACCESS_KEY     | AWS Access Key, required only if ECS is not enabled |
+| --aws-secret-key  | PS_AWS_SECRET_KEY     | AWS Secret Key, required only if ECS is not enabled |
+| --ecs-enabled     | -                     | If ECS is enabled. Defaults to **FALSE**            |
 
+### Examples
 
-## API
+#### Case 1: Your app does not run on AWS ECS
 
-Want to use `@siddmoitra/pino-sqs` as a library in your project?
+```bash
+$ node my-app | pino-sqs --queue-url <queueUrl> --aws-access-key <access_key> --aws-secret-key <secret_key>
+```
 
-To be followed...
+#### Case 2: Your app runs on AWS ECS
+
+```bash
+$ node my-app | pino-sqs --queue-url <queueUrl> --ecs-enabled
+```
+
 
 ## Maintainers
 
