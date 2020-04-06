@@ -40,13 +40,11 @@ const main = () => {
     .option('--aws-access-key <awsAccessKey>', 'AWS Access Key')
     .option('--aws-secret-key <awsSecretKey>', 'AWS Secret Key')
     .option('--aws-region <awsRegion>', 'AWS Region')
-    .option('--ecs-enabled', 'If this runs on AWS ECS', false)
     .option('--stdout-enabled', 'If the stdout is enabled', false)
     .action(async (options) => {
       try {
         const config = {
           sqsQueueUrl: options.queueUrl || process.env.PS_QUEUE_URL,
-          ecsEnabled: options.ecsEnabled,
           awsAccessKey: options.awsAccessKey || process.env.PS_AWS_ACCESS_KEY,
           awsSecretKey: options.awsSecretKey || process.env.PS_AWS_SECRET_KEY,
           awsRegion: options.awsRegion || process.env.PS_AWS_REGION,
@@ -62,6 +60,9 @@ const main = () => {
 
         const writeStream = await pump.createWriteStream(config);
         process.stdin.pipe(writeStream);
+        if (config.stdoutEnabled) {
+          process.stdin.pipe(process.stdout);
+        }
       } catch (err) {
         console.warn(err);
         process.exit(1);

@@ -46,37 +46,28 @@ You can pass the following options via cli arguments or use the environment vari
 | Full command      | Environment variable  | Description                                                                 |
 | ---               | ---                   | ---                                                                         |
 | --queue-url       | PS_QUEUE_URL          | The AWS SQS URL                                                             |
-| --aws-access-key  | PS_AWS_ACCESS_KEY     | AWS Access Key, required only if ECS is not enabled                         |
-| --aws-secret-key  | PS_AWS_SECRET_KEY     | AWS Secret Key, required only if ECS is not enabled                         |
+| --aws-access-key  | PS_AWS_ACCESS_KEY     | AWS Access Key                                                              |
+| --aws-secret-key  | PS_AWS_SECRET_KEY     | AWS Secret Key                                                              |
 | --aws-region      | PS_AWS_REGION         | AWS Region where SQS is deployed. If the value is not provided, pino-sqs tries to get the value from SQS URL |
-| --ecs-enabled     | -                     | If ECS is enabled. Defaults to **FALSE**                                    |
 | --stdout-enabled  | -                     | If stdout is enabled, logs are also piped to stdout. Defaults to **FALSE**  |
 
 ### Examples
 
-#### Case 1: Your app does not run on AWS ECS
+#### Case 1: Without stdout
 
 ```bash
 $ node my-app | pino-sqs --queue-url <queueUrl> --aws-access-key <access_key> --aws-secret-key <secret_key>
 ```
 
-#### Case 2: Your app runs on AWS ECS
+#### Case 2: With stdout
 
 ```bash
-$ node my-app | pino-sqs --queue-url <queueUrl> --ecs-enabled
-```
-
-#### Case 3: You want to also stdout your logs
-
-```bash
-$ node my-app | pino-sqs --queue-url <queueUrl> --stdout-enabled
+$ node my-app | pino-sqs --queue-url <queueUrl> --aws-access-key <access_key> --aws-secret-key <secret_key> --stdout-enabled
 
 {"level":20,"time":1585736923904,"pid":86640,"hostname":"INF-2018-049.local","msg":"Ad anim nostrud mollit fugiat non.","sqsMessageId":"c7d3ab68-01d6-42b0-879d-0146d9538e23"}
 
 ...
 ```
-
-A `sqsMessageId` is also appended to the logs if the log has been successfully sent to SQS.
 
 ## Maintainers
 
