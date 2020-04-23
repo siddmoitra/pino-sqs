@@ -10,7 +10,7 @@
     "url": "https://github.com/siddmoitra/pino-sqs/issues"
   },
   "dependencies": {
-    "aws-sdk": "^2.649.0",
+    "aws-sdk": "^2.650.0",
     "axios": "^0.19.2",
     "batch2": "^1.0.6",
     "commander": "^5.0.0",
