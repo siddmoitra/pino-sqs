@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.649.0",
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "batch2": "^1.0.6",
     "commander": "^5.0.0",
     "pumpify": "^2.0.1",
